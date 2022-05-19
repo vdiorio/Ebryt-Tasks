@@ -1,4 +1,6 @@
 import { Optional } from 'sequelize/types';
+import Task from '../../database/models/task';
+import { ITask } from '../interfaces/ITasks';
 
 export default class TaskService {
   static createTask = async (task: Optional<any, string>) => {
@@ -16,5 +18,10 @@ export default class TaskService {
     if (!newTask) return false;
     await newTask.update(task);
     return true;
+  };
+
+  static deleteTask = async (id: string) => {
+    const deletedRows = await Task.destroy({ where: { id } });
+    return deletedRows;
   };
 }
