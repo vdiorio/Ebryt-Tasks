@@ -17,6 +17,14 @@ export default class TaskController {
   static updateTask = async (req: Request, res: Response) => {
     const { id } = req.params;
     const fieldsToUpdate = req.body;
-    const affectedRows = await services.task.updateTask(id, fieldsToUpdate);
+    const task = await services.task.updateTask(id, fieldsToUpdate);
+    return res.status(StatusCodes.OK).json(task);
+  };
+
+  static deleteTask = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const affectedRows = await services.task.deleteTask(id);
+    if (affectedRows) return res.status(StatusCodes.NO_CONTENT).end();
+    return res.status(StatusCodes.NOT_FOUND).json({ message: 'Task não encontrada' });
   };
 }
