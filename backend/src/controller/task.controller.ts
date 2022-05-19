@@ -17,7 +17,6 @@ export default class TaskController {
   static updateTask = async (req: Request, res: Response) => {
     const { id } = req.params;
     const fieldsToUpdate = req.body;
-    const task = await services.task.updateTask(id, fieldsToUpdate);
-    return res.status(StatusCodes.OK).json(task);
+    const affectedRows = await services.task.updateTask(id, fieldsToUpdate);
   };
 }
