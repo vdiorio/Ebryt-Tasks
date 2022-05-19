@@ -5,4 +5,9 @@ export default class TaskService {
     const createdTask = Task.create(task);
     return createdTask;
   };
+
+  static getAllTasks = async () => {
+    const tasks = Task.findAll();
+    return tasks;
+  };
 }
