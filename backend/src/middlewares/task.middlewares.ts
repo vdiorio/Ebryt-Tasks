@@ -21,4 +21,13 @@ export default class TaskMiddlewares {
     }
     return next();
   };
+
+  static validateUpdateTask = async (req: Request, res: Response, next: NextFunction) => {
+    const { error } = this.atLeastOne.validate(req.body);
+    if (error) {
+      const { message } = error.details[0];
+      return res.status(StatusCodes.BAD_REQUEST).json({ message });
+    }
+    return next();
+  };
 }
