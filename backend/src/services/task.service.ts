@@ -10,4 +10,11 @@ export default class TaskService {
     const tasks = Task.findAll();
     return tasks;
   };
+
+  static updateTask = async (id: string, task: ITask) => {
+    const newTask = await Task.findByPk(id);
+    if (!newTask) return false;
+    await newTask.update(task);
+    return true;
+  };
 }
